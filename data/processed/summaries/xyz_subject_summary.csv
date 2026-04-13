@@ -1,0 +1,27 @@
+participant_id,color_space,demographics_csv,n_paired_trials,mean_pred_valence,mean_pred_arousal,mean_subj_valence,mean_subj_arousal,Are you pregnant?,Are you wearing makeup or sunscreen on your face?,Do you have a pacemaker?,Do you wear glasses?,Is your vision ok without glasses?,Participant #,Timestamp
+1,xyz,/media/mabl-main/Data/Physio-code/Data/1/P1/Demographics/Participant1.csv,22,-0.945974553234993,0.9396045093600701,0.22727272727272727,0.03977272727272727,No,No,No,No,Yes,1,4/11/2025 13:11:31
+8,xyz,/media/mabl-main/Data/Physio-code/Data/8/P1/Demographics/Participant 8.csv,22,-0.9698832505374615,0.5557954388498374,0.09090909090909091,-0.045454545454545456,No,No,No,No,Yes,8,4/17/2025 9:52:28
+9,xyz,/media/mabl-main/Data/Physio-code/Data/9/P1/Demographics/Participant 9.csv,22,-0.8777470526201016,0.16663516707233983,0.4659090909090909,-0.3352272727272727,No,No,No,No,Yes,9,4/17/2025 11:07:44
+11,xyz,/media/mabl-main/Data/Physio-code/Data/11/P1/Demographics/Participant 11.csv,22,-0.9817075238892513,0.6965658059752139,0.11363636363636363,-0.08522727272727272,No,No,No,No,Yes,11,4/17/2025 15:21:34
+12,xyz,/media/mabl-main/Data/Physio-code/Data/12/P1/Demographics/Participant 12.csv,22,-0.9638962343701127,0.9586588757857476,0.0,-0.8409090909090909,No,No,No,No,Yes,12,4/18/2025 12:29:10
+13,xyz,/media/mabl-main/Data/Physio-code/Data/13/P1/Demographics/Participant 13.csv,22,-0.5163347220987649,0.5338465580357549,0.06818181818181818,-0.1534090909090909,No,No,No,Yes,Yes,13,4/21/2025 14:14:37
+14,xyz,,22,-0.9971315160998269,0.9697353041644771,0.03977272727272727,-0.39204545454545453,,,,,,,
+15,xyz,/media/mabl-main/Data/Physio-code/Data/15/P1/Demographics/Participant 15.csv,22,-0.5706598705835048,0.26924899785300377,0.2159090909090909,0.35795454545454547,No,No,No,No,Yes,15,4/21/2025 16:08:57
+16,xyz,/media/mabl-main/Data/Physio-code/Data/16/P1/Demographics/Participant 16.csv,22,0.7604987910520573,0.9009514627447974,0.22727272727272727,0.011363636363636364,No,No,No,No,Yes,16,4/22/2025 11:05:30
+17,xyz,/media/mabl-main/Data/Physio-code/Data/17/P1/Demographics/Participant 17.csv,22,-0.09282818903428268,0.6042375161614468,-0.005681818181818182,-0.42613636363636365,No,No,No,No,Yes,17,4/22/2025 12:14:53
+18,xyz,/media/mabl-main/Data/Physio-code/Data/18/P1/Demographics/Participant 18.csv,22,-0.9139364072848185,-0.3010241887920405,0.11931818181818182,-0.011363636363636364,No,Yes,No,Yes,Yes,18,4/22/2025 15:40:26
+19,xyz,/media/mabl-main/Data/Physio-code/Data/19/P1/Demographics/Participant 19.csv,22,-0.9597550576395265,0.9938355809094788,0.05113636363636364,-0.38636363636363635,No,No,No,No,Yes,19,4/23/2025 16:34:23
+20,xyz,/media/mabl-main/Data/Physio-code/Data/20/P1/Demographics/Participant 20.csv,22,0.8316652816060119,0.9510517257435591,0.03977272727272727,0.0625,No,No,No,Yes,No,20,4/23/2025 23:49:34
+21,xyz,/media/mabl-main/Data/Physio-code/Data/21/P1/Demographics/Participant 21.csv,22,-0.9651156748901514,0.17903706013568807,0.125,-0.26704545454545453,No,No,No,Yes,No,21,4/23/2025 23:49:34
+22,xyz,/media/mabl-main/Data/Physio-code/Data/22/P1/Demographics/Participant 22.csv,22,-0.5740113940964878,-0.08773741556551798,-0.11363636363636363,0.11931818181818182,No,No,No,No,Yes,22,4/24/2025 12:16:26
+23,xyz,/media/mabl-main/Data/Physio-code/Data/23/P1/Demographics/Participant 23.csv,22,-0.9106389388701385,-0.5811384776933818,0.03977272727272727,-0.5170454545454546,No,Yes,No,No,Yes,23,4/25/2025 14:17:19
+24,xyz,/media/mabl-main/Data/Physio-code/Data/24/P1/Demographics/Participant 24.csv,22,-0.6592797466427435,0.6441999089358929,0.045454545454545456,0.05113636363636364,No,No,No,No,Yes,24,4/28/2025 14:54:27
+25,xyz,/media/mabl-main/Data/Physio-code/Data/25/P1/Demographics/Participant 25.csv,22,-0.918530757449453,0.8426948189737338,-0.4034090909090909,-0.35795454545454547,No,Yes,No,Yes,No,25,4/29/2025 11:07:50
+27,xyz,/media/mabl-main/Data/Physio-code/Data/27/P1/Demographics/Participant 27.csv,22,-0.7872982187012152,0.9737945322851961,0.3181818181818182,-0.03409090909090909,No,No,No,No,No,27,4/29/2025 15:15:30
+28,xyz,/media/mabl-main/Data/Physio-code/Data/28/P1/Demographics/Participant 28.csv,22,-0.955264730189577,0.8780863503321971,0.13636363636363635,-0.7272727272727273,No,No,No,Yes,Yes,28,4/29/2025 17:44:21
+29,xyz,/media/mabl-main/Data/Physio-code/Data/29/P1/Demographics/Participant 29.csv,22,-0.9699530514016296,0.882774485291137,0.10227272727272728,-0.028409090909090908,No,No,No,Yes,No,29,4/30/2025 10:18:25
+30,xyz,/media/mabl-main/Data/Physio-code/Data/30/P1/Demographics/Participant 30.csv,22,-0.38414587064088307,0.942059400331076,0.26704545454545453,0.03977272727272727,No,No,No,Yes,Yes,30,4/30/2025 13:56:22
+32,xyz,/media/mabl-main/Data/Physio-code/Data/32/P1/Demographics/Participant 32.csv,22,-0.8835787314022192,0.37044505247196696,0.0625,-0.21022727272727273,No,No,No,No,Yes,32,5/1/2025 14:45:43
+33,xyz,/media/mabl-main/Data/Physio-code/Data/33/P1/Demographics/Participant 33.csv,22,-0.33306993402673596,0.25588516176019477,0.16477272727272727,-0.29545454545454547,No,Yes,No,No,Yes,33,5/2/2025 16:29:40
+34,xyz,/media/mabl-main/Data/Physio-code/Data/34/P1/Demographics/Participant 34.csv,22,-0.246598345339925,0.7138559434008853,0.1590909090909091,0.10795454545454546,No,No,No,No,Yes,34,5/2/2025 16:32:37
+35,xyz,/media/mabl-main/Data/Physio-code/Data/35/P1/Demographics/Participant 35.csv,22,-0.4748739043207852,0.9774828592893366,0.11363636363636363,0.09659090909090909,No,Yes,No,Yes,Yes,35,5/4/2025 15:33:36
