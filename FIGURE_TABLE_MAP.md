@@ -127,6 +127,95 @@ python3 src/plotting/plot_trial_snippets.py \
   - Current defaults use SAM axis for visual alignment with self report
   - Titles use participant id plus color space plus video name
 
+### Circumplex pair plot for representative participant
+
+- Script
+  - `src/plotting/plot_circumplex_trial_pairs.py`
+- Inputs
+  - one participant file such as `data/processed/emotion_batch_data/15_xyz_fan.json`
+- Command
+
+```bash
+python3 src/plotting/plot_circumplex_trial_pairs.py \
+  --input data/processed/emotion_batch_data/15_xyz_fan.json \
+  --out outputs/circumplex_pid15_xyz_trial_pairs.png \
+  --annotate-trial-index
+```
+
+- Output
+  - `outputs/circumplex_pid15_xyz_trial_pairs.png`
+
+### Circumplex angle and segment calculations
+
+- Script
+  - `src/metrics/calc_circumplex_segments.py`
+- Inputs
+  - `data/processed/emotion_batch_data/*_xyz_fan.json` or all spaces
+- Commands
+
+```bash
+python3 src/metrics/calc_circumplex_segments.py \
+  --inputs 'data/processed/emotion_batch_data/*_xyz_fan.json' \
+  --scale sam \
+  --out-csv data/processed/summaries/circumplex_angles_all_xyz.csv
+```
+
+```bash
+python3 src/metrics/calc_circumplex_segments.py \
+  --inputs 'data/processed/emotion_batch_data/*_fan.json' \
+  --scale sam \
+  --out-csv data/processed/summaries/circumplex_angles_all_spaces.csv
+```
+
+### Circumplex decision style evaluation figures
+
+- Script
+  - `src/plotting/plot_circumplex_evaluation.py`
+- Inputs
+  - `data/processed/summaries/circumplex_angles_all_xyz.csv`
+- Commands
+
+```bash
+python3 src/plotting/plot_circumplex_evaluation.py \
+  --angles-csv data/processed/summaries/circumplex_angles_all_xyz.csv \
+  --color-space xyz \
+  --out-prefix outputs/circumplex_eval
+```
+
+```bash
+python3 src/plotting/plot_circumplex_evaluation.py \
+  --angles-csv data/processed/summaries/circumplex_angles_all_xyz.csv \
+  --color-space xyz \
+  --participant-id 15 \
+  --out-prefix outputs/circumplex_eval
+```
+
+- Outputs
+  - `outputs/circumplex_eval_xyz_all_quadrant_confusion.png`
+  - `outputs/circumplex_eval_xyz_all_error_distributions.png`
+  - `outputs/circumplex_eval_xyz_all_summary.json`
+  - `outputs/circumplex_eval_xyz_pid15_quadrant_confusion.png`
+  - `outputs/circumplex_eval_xyz_pid15_error_distributions.png`
+  - `outputs/circumplex_eval_xyz_pid15_summary.json`
+
+### Circumplex XYZ distribution overview
+
+- Script
+  - `src/plotting/plot_circumplex_xyz.py`
+- Inputs
+  - `data/processed/summaries/circumplex_angles_all_xyz.csv`
+- Command
+
+```bash
+python3 src/plotting/plot_circumplex_xyz.py \
+  --angles-csv data/processed/summaries/circumplex_angles_all_xyz.csv \
+  --display-scale sam \
+  --out outputs/xyz_circumplex_model_vs_self_sam_axes.png
+```
+
+- Output
+  - `outputs/xyz_circumplex_model_vs_self_sam_axes.png`
+
 ### Trial error and QC figures
 
 - Scripts

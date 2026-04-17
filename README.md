@@ -19,6 +19,9 @@ Aggregate analysis for participant json outputs with correlation style checks an
 `src/metrics/calc_physio_pred_sam_agreement.py`
 Agreement calculator for CCC PCC RMSE and SAGR between model predictions and SAM ratings.
 
+`src/metrics/calc_circumplex_segments.py`
+Computes trial level circumplex angles and segment assignments for model and self report including quadrant octant and region matching.
+
 ### src plotting
 `src/plotting/plot_physio_color_space_bars.py`
 Creates cross space summary figures for metric comparison across RGB YCbCr XYZ and LAB.
@@ -28,6 +31,15 @@ Creates trial level time series figures for valence and arousal with music video
 
 `src/plotting/plot_trial_errors.py`
 Creates error focused plots used for trial quality and failure pattern inspection.
+
+`src/plotting/plot_circumplex_xyz.py`
+Creates XYZ circumplex distribution figures for model versus self report.
+
+`src/plotting/plot_circumplex_trial_pairs.py`
+Creates per participant circumplex pair plots with one line per trial between model and self report.
+
+`src/plotting/plot_circumplex_evaluation.py`
+Creates quadrant confusion matrices plus directional and magnitude error distributions including normalized distance.
 
 ### src export
 `src/export/export_physio_color_space_overleaf.py`
@@ -65,6 +77,12 @@ Per subject per color space trial outputs
 `data/processed/summaries/physio_xyz_agreement_metrics.csv`
 
 `data/processed/summaries/ieee_smc_demographics_xyz.md`
+
+`data/processed/summaries/circumplex_angles_all_xyz.csv`
+
+`data/processed/summaries/circumplex_eval_xyz_all_summary.json`
+
+`data/processed/summaries/circumplex_eval_xyz_pid15_summary.json`
 
 ## Trained models final run only
 
