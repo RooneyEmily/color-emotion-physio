@@ -220,8 +220,53 @@ General color constancy methods are not designed specifically for colorimetric a
 
 \subsection{Project Four: Physiological Enhancement of Affect Estimation}
 
-% TODO: Replace this placeholder with the condensed physiological and
-% multimodal background in the next editing pass.
+Project Four examines whether physiological information derived from facial video improves prediction of valence and arousal beyond visible facial appearance alone. It does not treat physiology as a direct measurement of emotion. The project first establishes whether cardiac information can be recovered reliably from the available video and then tests whether validated physiological features provide complementary predictive information.
+
+\subsubsection{Remote Photoplethysmography}
+
+Photoplethysmography measures changes in blood volume through corresponding changes in light absorption. Traditional photoplethysmography uses a contact light source and sensor. Remote photoplethysmography estimates related temporal variation from video recorded at a distance.
+
+Blood volume changes during each cardiac cycle produce small variations in skin reflectance. Verkruysse and colleagues demonstrated that pulse information could be recovered from facial video recorded under ambient illumination \cite{verkruysse2008}. Later approaches used combinations of RGB channels and temporal processing to separate the pulse signal from noise \cite{poh2010,dehaan2013,wang2017}.
+
+The physiological component is much smaller than the stable facial signal. Motion, changing illumination, automatic exposure, white balance, compression, and sensor noise can obscure or imitate cardiovascular variation. Reliable extraction therefore requires stable facial regions, temporal preprocessing, and an explicit measure of signal quality.
+
+Simple methods use the average green channel because hemoglobin absorption and common camera sensitivities often produce a strong pulse signal in that channel. Blind source separation methods combine several channels. Chrominance based approaches such as CHROM and POS use normalized channel relationships to reduce intensity variation shared across channels \cite{dehaan2013,wang2017}. No method is uniformly optimal across cameras, lighting, motion, and participants.
+
+Skin reflectance influences the number and spectral distribution of photons recorded by the camera. This may affect pulse signal quality under some exposure and illumination conditions. The effect cannot be attributed to pigmentation alone because camera sensitivity, source spectrum, processing, motion, and algorithm design also contribute. Prior studies have reported different findings across skin pigmentation groups \cite{addison2018,barde2023}. Evaluation should therefore examine both estimation error and signal failure across continuously measured skin color.
+
+\subsubsection{Heart Rate and Heart Rate Variability}
+
+Heart rate and heart rate variability describe different properties. Average heart rate can be estimated from the dominant periodic component of a temporal signal. Heart rate variability requires sufficiently accurate timing of individual beats.
+
+Camera frame rate limits beat timing resolution. At 25 frames per second, adjacent frames are separated by approximately 40 milliseconds. Interpolation may refine an estimated peak location but cannot restore information that was not sampled. Dropped frames, compression, waveform smoothing, and motion introduce further timing uncertainty.
+
+Recording duration also limits interpretation. One minute trials may support selected short term time domain measures but are not appropriate for every conventional heart rate variability metric. Frequency domain measures are particularly sensitive to recording length. The proposed feature set must therefore be restricted to measurements that are defensible for the available sampling rate and trial duration.
+
+Camera derived cardiac measurements should be validated against synchronized electrocardiography before they are used as affect model inputs. Reliable average heart rate does not establish reliable interbeat intervals. If camera derived variability is not sufficiently accurate, the project can evaluate average heart rate, pulse amplitude, signal quality, or contact derived variability as separate inputs.
+
+\subsubsection{Physiology and Affect}
+
+Physiological activation and emotion are related but are not interchangeable. Heart rate may change because of movement, posture, attention, temperature, medication, or stress. A cardiovascular change does not uniquely identify an emotional state.
+
+Facial expression, physiology, observer annotation, and participant self report provide different observations of an affective response \cite{scherer2005}. A participant may experience high arousal without displaying a strong facial expression. Another participant may display an expressive response with only a small cardiovascular change. Disagreement among modalities may therefore contain meaningful information rather than simple measurement error.
+
+Previous work has identified relationships between heart rate variability and affective dimensions under controlled conditions \cite{nardelli2015}. Datasets such as DEAP have supported multimodal analysis of physiological recordings, affective stimuli, and participant ratings \cite{koelstra2012}. Much of this research relies on contact sensors rather than physiological information estimated from the same camera used for facial analysis.
+
+\subsubsection{Multimodal Affect Estimation}
+
+Multimodal learning combines information from more than one source \cite{baltrusaitis2019}. Facial video contains visible information about expression, gaze, pose, and movement. Physiological signals contain information about autonomic activation. Combining them may improve prediction when they provide complementary evidence.
+
+Additional modalities do not guarantee better performance. Noisy physiological estimates can reduce accuracy, while a flexible fusion model can overfit when the number of participants is limited. Every multimodal model must therefore be compared with a visual only baseline under identical participant partitions.
+
+Contact and camera derived physiology serve different experimental roles. Contact electrocardiography can indicate whether high quality physiological features contain predictive information beyond facial appearance. Camera derived physiology tests whether enough of that information can be recovered noninvasively for practical use. A camera only model must not include contact features at deployment.
+
+Participant independent validation is necessary because repeated trials from one participant are correlated and physiological baselines vary among individuals. Normalization, feature selection, model fitting, and hyperparameter selection must be performed without using held out participant outcomes. Performance should be reported with confidence intervals, signal coverage, and failure rates.
+
+\subsubsection{Physiological Affect Research Gap}
+
+Visual affect estimation and remote physiological measurement are commonly evaluated as separate problems. Physiological affect studies often use contact sensors, while remote photoplethysmography studies typically stop after estimating cardiac measurements. There is limited evidence that validated physiology derived from facial video improves an established visual affect model.
+
+Project Four addresses this gap using synchronized facial video, electrocardiography, galvanic skin response, and trial level self reports from MABL ME. Camera derived cardiac features will first be validated against contact measurements. Visual only, contact multimodal, and camera multimodal models will then be compared using participant independent evaluation. This design separates the potential value of physiology from the practical accuracy of its camera based estimate.
 
 \subsection{Background Synthesis and Dissertation Gap}
 
@@ -314,6 +359,56 @@ Computational color constancy with survey and experiments.
 M. Xie, P. Sun, Y. Lang, and M. Fang.
 Camera independent color constancy by scene semantics.
 \textit{Pattern Recognition Letters}, 171, pages 106 to 115, 2023.
+
+\bibitem{verkruysse2008}
+W. Verkruysse, L. O. Svaasand, and J. S. Nelson.
+Remote plethysmographic imaging using ambient light.
+\textit{Optics Express}, 16, pages 21434 to 21445, 2008.
+
+\bibitem{poh2010}
+M. Z. Poh, D. J. McDuff, and R. W. Picard.
+Noncontact automated cardiac pulse measurements using video imaging and blind source separation.
+\textit{Optics Express}, 18, pages 10762 to 10774, 2010.
+
+\bibitem{dehaan2013}
+G. de Haan and V. Jeanne.
+Robust pulse rate from chrominance based remote photoplethysmography.
+\textit{IEEE Transactions on Biomedical Engineering}, 60, pages 2878 to 2886, 2013.
+
+\bibitem{wang2017}
+W. Wang, A. C. den Brinker, S. Stuijk, and G. de Haan.
+Algorithmic principles of remote photoplethysmography.
+\textit{IEEE Transactions on Biomedical Engineering}, 64, pages 1479 to 1491, 2017.
+
+\bibitem{addison2018}
+P. S. Addison, D. Jacquel, D. M. H. Foo, and U. R. Borg.
+Video based heart rate monitoring across a range of skin pigmentations during an acute hypoxic challenge.
+\textit{Journal of Clinical Monitoring and Computing}, 32, pages 871 to 880, 2018.
+
+\bibitem{barde2023}
+K. Barde and colleagues.
+Measurements of pulse rate using facial video cameras from smart devices in patients diagnosed with atrial fibrillation.
+\textit{Journal of Electrocardiology}, 78, pages 58 to 64, 2023.
+
+\bibitem{scherer2005}
+K. R. Scherer.
+What are emotions and how can they be measured.
+\textit{Social Science Information}, 44, pages 695 to 729, 2005.
+
+\bibitem{baltrusaitis2019}
+T. Baltru\v{s}aitis, C. Ahuja, and L. P. Morency.
+Multimodal machine learning with a survey and taxonomy.
+\textit{IEEE Transactions on Pattern Analysis and Machine Intelligence}, 41, pages 423 to 443, 2019.
+
+\bibitem{koelstra2012}
+S. Koelstra and colleagues.
+DEAP with a database for emotion analysis using physiological signals.
+\textit{IEEE Transactions on Affective Computing}, 3, pages 18 to 31, 2012.
+
+\bibitem{nardelli2015}
+M. Nardelli, G. Valenza, A. Greco, A. Lanata, and E. P. Scilingo.
+Recognizing emotions induced by affective sounds through heart rate variability.
+\textit{IEEE Transactions on Affective Computing}, 6, pages 385 to 394, 2015.
 
 \bibitem{russell1980}
 J. A. Russell.
