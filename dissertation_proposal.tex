@@ -61,11 +61,53 @@ July 2026
 
 \section{Introduction}
 
-Human skin contains measurable information about surface appearance, tissue composition, cardiovascular activity, and affect related behavior. Cameras provide a practical and noncontact means of observing these signals. Camera based measurement is therefore relevant to color science, physiological monitoring, affective computing, and human computer interaction. A camera does not measure these properties directly. Its recorded values result from interactions among the spectral power distribution of the illumination, the spectral reflectance of the skin, tissue dependent light absorption and scattering, camera spectral sensitivities, exposure settings, and subsequent image processing operations.
+\subsection{Motivation and Measurement Challenge}
 
-Several signals can coexist within the same facial pixels. Stable spatial differences may describe skin reflectance. Temporal color changes may encode blood volume variation. Illumination changes can alter both types of information. Facial movement and expression may provide evidence related to affect. These sources of variation can reinforce or confound one another. A model trained directly on rendered RGB imagery may learn useful statistical relationships without separating the physical factors responsible for the recorded signal. This can reduce its reliability when it is applied to new cameras, lighting conditions, environments, or populations.
+Human skin contains measurable information about surface appearance, tissue composition, cardiovascular activity, and affect related behavior. Cameras provide a practical and noncontact means of observing these signals. Camera based measurement is therefore relevant to color science, physiological monitoring, affective computing, telehealth, cosmetics, and human computer interaction. Consumer cameras are particularly attractive because they are widely available and can collect spatial and temporal information without requiring a sensor to remain in contact with the body.
 
-This dissertation approaches facial imaging as a physically grounded measurement problem. Its four projects examine how color representation affects affect estimation, how skin color can be recovered from flash and no flash images, how scene illumination can be estimated from facial appearance, and whether camera derived physiological information improves valence and arousal estimation. Together, these projects investigate when colorimetric modeling can improve the accuracy, interpretability, generalizability, and equity of camera based measurements derived from human skin.
+A camera does not measure skin reflectance, illumination, physiology, or affect directly. Its pixel values result from interactions among the spectral power distribution of the illumination, the optical properties of the skin, camera spectral sensitivities, exposure settings, viewing geometry, and the image processing pipeline. The same skin can produce different RGB values when the illuminant, camera, or processing changes. Different combinations of illumination and reflectance can also produce similar camera responses. Camera based measurement is therefore an inverse problem in which the desired property must be inferred from observations that combine several physical factors.
+
+The problem is more complex for facial video because several signals coexist within the same pixels. Stable spatial differences may describe skin appearance. Small temporal color variations may encode changes in blood volume. Illumination and automatic exposure may alter both signals. Facial configuration and movement may provide evidence related to affect. Motion, compression, and sensor noise can imitate or obscure physiological variation. A useful camera measurement system must therefore determine which variation is associated with the desired quantity and which variation should be treated as a confound.
+
+Modern learning systems can estimate labels directly from rendered RGB imagery without explicitly separating these factors. Such models may achieve strong performance within a benchmark while relying on relationships that are specific to its cameras, participants, lighting, or annotations. Performance on one dataset does not establish that a model has recovered the intended physical quantity. It may instead have learned a correlation that fails when the acquisition conditions or population change. Physically grounded models, controlled comparisons, independent reference measurements, and external datasets are needed to distinguish useful measurement from dataset specific prediction.
+
+Camera processing creates an additional challenge. RAW values can preserve a closer relationship to sensor measurements, while rendered images may include demosaicing, white balance, denoising, tone mapping, sharpening, gamut mapping, and compression. Computational RAW formats may also include multiple exposure fusion and gain maps. These operations can improve appearance while changing the relationships needed for colorimetric or physiological interpretation. The exact representation entering an analysis must therefore be documented and matched to the claim being made.
+
+\subsection{Skin Color and Measurement Equity}
+
+Skin is a layered optical material whose appearance is influenced by melanin, hemoglobin, tissue structure, hydration, surface texture, specular reflection, and subsurface scattering. These factors vary continuously among individuals and across anatomical locations. Illumination spectrum and geometry interact with this variation before the signal reaches the camera. Consequently, skin appearance cannot be described adequately by a broad demographic category or a single uncharacterized RGB value.
+
+Measurement performance may also vary across skin reflectances. Lower detected intensity can reduce signal to noise ratio under some illumination and exposure conditions. Automatic exposure and tone processing may compensate for part of this variation, but they can introduce subject dependent nonlinear processing. A system may report similar error among successful measurements while failing more often for one portion of the skin color range. Equitable evaluation must therefore consider both accuracy and measurement availability.
+
+Common skin tone scales address different purposes. The Fitzpatrick Skin Type scale describes reported response to ultraviolet exposure and was not designed as an objective color scale \cite{gupta2019}. The Monk Skin Tone scale offers a broader visual range for annotation and representation, but it remains an ordinal set of appearance categories. Visual assignment can be influenced by illumination, displays, surrounding colors, and observer judgment \cite{heldreth2024}. Recent colorimetric scales provide stronger links to measured CIE coordinates and demonstrate that skin annotation can be grounded more directly in color science \cite{cook2025}.
+
+The data collected for this dissertation may support an exploratory extension of this work. Contact based cheek measurements, camera estimates, and observations across controlled illuminants can be used to evaluate how well existing scales cover the measured skin color distribution. A camera measurement oriented representation could preserve continuous \(L^*\), \(a^*\), and \(b^*\) values while optionally defining a smaller set of perceptually spaced reference samples for communication or stratified analysis.
+
+This extension should not be presented initially as a universal replacement for the Monk scale. Developing a new validated skin tone scale would require a sufficiently large and representative cohort, defined viewing conditions, perceptual spacing experiments, interobserver evaluation, and external validation. Within the current dissertation, the defensible contribution is an exploratory colorimetric framework and an evaluation of whether the collected data reveal coverage or spacing limitations in existing scales. A stronger scale claim would depend on the size and diversity of the final dataset and may motivate subsequent work.
+
+\subsection{Dissertation Scope}
+
+This dissertation approaches facial imaging as a physically grounded measurement problem through four related projects. Each project examines a different quantity while sharing the same concern with color representation, image formation, validation, and performance across skin colors.
+
+Project One examines color representation for continuous affect estimation. Deep learning models commonly use RGB because datasets and pretrained networks are distributed in that form. This convention does not establish that RGB is optimal. The project uses a controlled comparison of RGB, XYZ, CIELAB, and YCbCr while holding the architecture, training protocol, and data partitions constant. The primary analysis evaluates performance within AFEW VA, while SEWA and MABL ME provide external tests of domain and label transfer. This project has been completed and prepared as a conference paper. Its findings establish the role and limitations of input representation under a frozen RGB pretrained backbone.
+
+Project Two examines camera based skin reflectance and color estimation. It asks whether matched flash and no flash consumer camera images can recover skin CIELAB values without requiring a physical target during inference. Offline camera characterization provides traceability during model development, while contact based cheek measurements provide an independent reference. The project connects camera colorimetry with intrinsic decomposition and inverse rendering but evaluates the output as a color measurement rather than only as a visually plausible image. The resulting measurements also provide the basis for evaluating existing skin tone scales and exploring a continuous colorimetric representation.
+
+Project Three examines facial illumination estimation. Illumination and pigmentation can produce related changes in camera RGB, creating a confound for portrait based color constancy. The project estimates physically interpretable quantities such as chromaticity, correlated color temperature, and \(D_{uv}\) from facial imagery using instrument measured illumination as reference data. It also tests whether independently measured skin color helps a model distinguish pigmentation from illumination. The project links illuminant estimation to practical skin color correction by evaluating corrected facial color against contact measurements.
+
+Project Four examines whether camera derived physiological information improves affect estimation beyond visible facial appearance. Remote photoplethysmography can estimate cardiovascular variation from facial video, but physiological validity must be established before the signal is used as a model input. Camera derived cardiac features will therefore be compared with synchronized electrocardiography. Visual only, contact multimodal, and camera multimodal affect models will then be evaluated using participant independent partitions. This design separates the potential value of physiological information from the practical accuracy of its camera based estimate.
+
+The projects are complementary but should not be interpreted as estimating equivalent quantities. Reflectance and illumination are physical optical properties. Cardiac measurements describe physiology. Valence and arousal are labels associated with affective expression or reported experience. A color space is an input representation rather than a representation of emotion. Maintaining these distinctions is necessary to ensure that each conclusion matches the evidence supporting it.
+
+\subsection{Central Objective and Contributions}
+
+The central objective of this dissertation is to determine how physically grounded color and imaging methods can improve the estimation of skin appearance, illumination, physiology, and affect related information from facial images across skin colors. The work combines controlled model comparisons, consumer camera acquisition, instrument based reference measurements, synchronized physiological recordings, and external datasets.
+
+The dissertation is expected to contribute a controlled evaluation of color representation for continuous affect regression, a target free deployment approach for camera based skin color estimation, a facial illuminant estimation framework with physically interpretable outputs, and an evaluation of whether validated camera derived physiology adds predictive value to visual affect estimation. A secondary contribution is an evidence based assessment of skin tone representation using continuous colorimetric measurements.
+
+The studies are at different stages of completion. Project One is complete. Data collection and preliminary analysis support portions of Projects Two and Four. Project Three and the remaining validation and multimodal analyses constitute proposed work. Completed work is reported in the past tense, while remaining work is described in the future tense.
+
+The following background establishes the shared image formation, colorimetric, skin optical, physiological, and affective computing concepts needed by the four projects. Subsequent sections state the research questions and describe the completed and proposed methodology, evaluation, expected contributions, and limitations of each project.
 
 \section{Background}
 
@@ -349,6 +391,16 @@ The CIEDE2000 color difference formula.
 V. Gupta and V. K. Sharma.
 Skin typing with Fitzpatrick grading and other approaches.
 \textit{Clinics in Dermatology}, 37, pages 430 to 436, 2019.
+
+\bibitem{heldreth2024}
+C. M. Heldreth and colleagues.
+Which skin tone measures are the most inclusive? An investigation of skin tone measures for artificial intelligence.
+\textit{ACM Journal on Responsible Computing}, 1, pages 1 to 21, 2024.
+
+\bibitem{cook2025}
+C. Cook, J. Howard, L. Rabbitt, I. Shuggi, Y. Sirotin, J. Tipton, and A. Vemury.
+Colorimetric skin tone scale for improved accuracy of human skin tone annotations.
+\textit{ACM Journal on Responsible Computing}, 2, pages 1 to 23, 2025.
 
 \bibitem{gijsenij2011}
 A. Gijsenij, T. Gevers, and J. van de Weijer.
